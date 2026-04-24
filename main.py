@@ -20,7 +20,6 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan events."""
     logger.info("🚀 PingRoom API starting up...")
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     yield
@@ -36,17 +35,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# ── CORS FIX (IMPORTANT) ──────────────────────────────────────────────────────
-
-origins = [
-    "http://localhost:3000",  # local dev
-    "https://pingroom-frontend.vercel.app",  # your main Vercel domain
-    "https://*.vercel.app",  # allow preview deployments
-]
-
+# 🚀 FINAL CORS FIX (THIS SOLVES YOUR PROBLEM)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],   # ✅ allow all (fixes your error)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
