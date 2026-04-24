@@ -31,7 +31,7 @@ app = FastAPI(
     title="PingRoom API",
     description="Production-ready real-time chat SaaS backend with Supabase & Stripe",
     version="1.0.0",
-    docs_url="/docs"
+    docs_url="/docs",
     redoc_url="/redoc" if settings.ENVIRONMENT != "production" else None,
     lifespan=lifespan,
 )
