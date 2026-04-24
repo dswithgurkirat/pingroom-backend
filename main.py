@@ -36,10 +36,17 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# ── CORS ──────────────────────────────────────────────────────────────────────
+# ── CORS FIX (IMPORTANT) ──────────────────────────────────────────────────────
+
+origins = [
+    "http://localhost:3000",  # local dev
+    "https://pingroom-frontend.vercel.app",  # your main Vercel domain
+    "https://*.vercel.app",  # allow preview deployments
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins_list,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
